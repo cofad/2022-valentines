@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <h1></h1>
+    <img class="fade-in" src="" />
+
+    <script>
+      let imgSrcs = [
+        "/assets/will-and-sarah.webp",
+        "/assets/will-and-ollie.webp",
+        "/assets/will-and-theo.webp",
+        "",
+      ];
+
+      let names = ["Sarah", "Ollie", "Theo"];
+
+      let index = 0;
+
+      updatePage();
+
+      setInterval(async () => {
+        updatePage();
+      }, 10000);
+
+      async function updatePage() {
+        const img = document.querySelector("img");
+        const h1 = document.querySelector("h1");
+
+        if (index === 3) {
+          h1.innerHTML = "Love Dad!";
+        } else {
+          h1.innerHTML = "Happy Valentines " + names[index] + "!";
+        }
+
+        img.src = imgSrcs[index];
+
+        img.classList.remove("fade-in");
+        await sleep(1);
+        img.classList.add("fade-in");
+
+        index = index === imgSrcs.length - 1 ? 0 : index + 1;
+      }
+
+      async function sleep(milliseconds) {
+        return new Promise((resolve) => {
+          setTimeout(() => {
+            resolve();
+          }, milliseconds);
+        });
+      }
+    </script>
+  </body>
+</html>
